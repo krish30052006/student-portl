@@ -1,0 +1,31 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Dashboard from './components/Dashboard';
+import AddIncome from './components/income/AddIncome';
+import IncomeList from './components/income/IncomeList';
+import AddExpense from './components/expenses/AddExpense';
+import ExpenseList from './components/expenses/ExpenseList';
+import PrivateRoute from './components/routing/PrivateRoute';
+import { AuthProvider } from './context/AuthContext';
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/add-income" element={<PrivateRoute><AddIncome /></PrivateRoute>} />
+          <Route path="/income" element={<PrivateRoute><IncomeList /></PrivateRoute>} />
+          <Route path="/add-expense" element={<PrivateRoute><AddExpense /></PrivateRoute>} />
+          <Route path="/expenses" element={<PrivateRoute><ExpenseList /></PrivateRoute>} />
+        </Routes>
+      </Router>
+      </AuthProvider>
+  );
+}
+
+export default App;
